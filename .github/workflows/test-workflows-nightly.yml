@@ -7,15 +7,16 @@ run-name: 'Test: Workflows Nightly (${{ inputs.git_ref_to_test }})'
 # EADDRINUSE), not a product regression. Re-enable the `schedule` trigger once the
 # port cleanup / ephemeral-port fix lands. The job can still be run on demand via
 # workflow_dispatch.
-on:
-  workflow_dispatch:
-    inputs:
-      git_ref_to_test:
-        description: 'The Git ref (branch, tag, or SHA) to run tests against.'
-        required: true
-        type: string
-        default: 'master'
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       git_ref_to_test:
+#         description: 'The Git ref (branch, tag, or SHA) to run tests against.'
+#         required: true
+#         type: string
+#         default: 'master'
+# 
 jobs:
   run_workflow_tests:
     name: Run Workflow Tests

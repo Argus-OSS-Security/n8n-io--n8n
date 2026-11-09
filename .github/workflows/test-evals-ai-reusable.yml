@@ -1,37 +1,38 @@
 name: 'Test: Evals AI'
 
-on:
-  workflow_call:
-    inputs:
-      branch:
-        description: 'GitHub branch to test.'
-        type: string
-        default: 'master'
-      suite:
-        description: 'Evaluation suite to run (pairwise or llm-judge).'
-        type: string
-        default: 'pairwise'
-      dataset:
-        description: 'LangSmith dataset to use.'
-        type: string
-        required: true
-      repetitions:
-        description: 'Number of repetitions to run.'
-        type: number
-        default: 1
-      judges:
-        description: 'Number of judges to use.'
-        type: number
-        default: 1
-      concurrency:
-        description: 'Max concurrent evaluations.'
-        type: number
-        default: 10
-      experiment_name_prefix:
-        description: 'Prefix for the experiment name. If empty, will be auto-generated from branch name.'
-        type: string
-        default: ''
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       branch:
+#         description: 'GitHub branch to test.'
+#         type: string
+#         default: 'master'
+#       suite:
+#         description: 'Evaluation suite to run (pairwise or llm-judge).'
+#         type: string
+#         default: 'pairwise'
+#       dataset:
+#         description: 'LangSmith dataset to use.'
+#         type: string
+#         required: true
+#       repetitions:
+#         description: 'Number of repetitions to run.'
+#         type: number
+#         default: 1
+#       judges:
+#         description: 'Number of judges to use.'
+#         type: number
+#         default: 1
+#       concurrency:
+#         description: 'Max concurrent evaluations.'
+#         type: number
+#         default: 10
+#       experiment_name_prefix:
+#         description: 'Prefix for the experiment name. If empty, will be auto-generated from branch name.'
+#         type: string
+#         default: ''
+# 
 jobs:
   evals:
     name: Run ${{ inputs.suite }} Evaluations

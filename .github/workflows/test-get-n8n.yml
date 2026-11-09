@@ -8,17 +8,18 @@ name: 'Test get-n8n.sh installer'
 # release and pulls searxng at :latest, so a change outside this repo can
 # break installs without any change to the script itself.
 
-on:
-  pull_request:
-    paths:
-      - 'docker/get-n8n.sh'
-      - 'docker/get-n8n-compose.yml'
-      - 'docker/test-get-n8n.sh'
-      - '.github/workflows/test-get-n8n.yml'
-  schedule:
-    - cron: '0 2 * * *'
-  workflow_dispatch:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     paths:
+#       - 'docker/get-n8n.sh'
+#       - 'docker/get-n8n-compose.yml'
+#       - 'docker/test-get-n8n.sh'
+#       - '.github/workflows/test-get-n8n.yml'
+#   schedule:
+#     - cron: '0 2 * * *'
+#   workflow_dispatch:
+# 
 permissions:
   contents: read
 

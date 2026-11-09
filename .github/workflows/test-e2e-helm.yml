@@ -1,31 +1,32 @@
 name: 'Test: E2E Helm Chart'
 run-name: "${{ github.event_name == 'workflow_dispatch' && format('Test: E2E Helm Chart (mode={0}, branch={1}, chart={2})', inputs.mode, inputs.branch || 'default', inputs['helm-chart-ref']) || '' }}"
 
-on:
-  pull_request:
-    paths:
-      - '.github/workflows/test-e2e-helm.yml'
-      - 'packages/quality/environments/containers/helm-stack.ts'
-      - 'packages/quality/environments/containers/helm-start-stack.ts'
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch to test'
-        required: false
-        default: ''
-      helm-chart-ref:
-        description: 'n8n-hosting branch/tag for Helm chart'
-        required: false
-        default: 'main'
-      mode:
-        description: 'Deployment mode to test'
-        required: true
-        type: choice
-        options:
-          - standalone
-          - queue
-        default: 'queue'
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     paths:
+#       - '.github/workflows/test-e2e-helm.yml'
+#       - 'packages/quality/environments/containers/helm-stack.ts'
+#       - 'packages/quality/environments/containers/helm-start-stack.ts'
+#   workflow_dispatch:
+#     inputs:
+#       branch:
+#         description: 'Branch to test'
+#         required: false
+#         default: ''
+#       helm-chart-ref:
+#         description: 'n8n-hosting branch/tag for Helm chart'
+#         required: false
+#         default: 'main'
+#       mode:
+#         description: 'Deployment mode to test'
+#         required: true
+#         type: choice
+#         options:
+#           - standalone
+#           - queue
+#         default: 'queue'
+# 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.repository }}:ci-${{ github.run_id }}
   HELM_CHART_REF: ${{ inputs.helm-chart-ref || 'main' }}

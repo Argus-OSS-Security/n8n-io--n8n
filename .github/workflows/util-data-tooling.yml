@@ -7,9 +7,10 @@ name: 'Util: Data Tooling'
 #       - '**'
 #       - '!release/*'
 
-on:
-  workflow_dispatch:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+# 
 jobs:
   sqlite-export-sqlite-import:
     name: sqlite database export -> sqlite database import

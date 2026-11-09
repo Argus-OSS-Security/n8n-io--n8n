@@ -1,12 +1,13 @@
 name: 'CI: Terraform'
 
-on:
-  pull_request:
-    paths:
-      - packages/quality/efficiency/scale/benchmark/infra/**
-      - .github/workflows/ci-terraform.yml
-
-# The job only reads the repo and runs terraform. It writes nothing.
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     paths:
+#       - packages/quality/efficiency/scale/benchmark/infra/**
+#       - .github/workflows/ci-terraform.yml
+# 
+# # The job only reads the repo and runs terraform. It writes nothing.
 permissions:
   contents: read
 

@@ -58,22 +58,23 @@ run-name: "${{ github.event_name == 'workflow_dispatch' && format('CI: Owners Re
 #     to pending, so a run that crashes at any later point cannot leave a
 #     stale verdict in effect. The job itself only fails on errors.
 
-on:
-  pull_request_target:
-    types: [opened, synchronize, reopened, ready_for_review, edited, labeled, unlabeled]
-  pull_request_review:
-    types: [submitted, dismissed]
-  workflow_run:
-    workflows: ['Util: Notify PR Status']
-    types: [completed]
-  merge_group:
-  workflow_dispatch:
-    inputs:
-      pr_number:
-        description: 'Pull request number to re-evaluate'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request_target:
+#     types: [opened, synchronize, reopened, ready_for_review, edited, labeled, unlabeled]
+#   pull_request_review:
+#     types: [submitted, dismissed]
+#   workflow_run:
+#     workflows: ['Util: Notify PR Status']
+#     types: [completed]
+#   merge_group:
+#   workflow_dispatch:
+#     inputs:
+#       pr_number:
+#         description: 'Pull request number to re-evaluate'
+#         required: true
+#         type: string
+# 
 permissions:
   contents: read
 

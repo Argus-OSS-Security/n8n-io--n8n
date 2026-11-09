@@ -1,24 +1,25 @@
 name: 'Release: Promote Backport Labels'
 run-name: 'Promoting backport labels for n8n@${{ inputs.version }}'
 
-on:
-  workflow_call:
-    inputs:
-      version:
-        required: true
-        type: string
-    secrets:
-      N8N_ASSISTANT_APP_ID:
-        required: true
-      N8N_ASSISTANT_PRIVATE_KEY:
-        required: true
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'The minor release version (e.g. 2.10.0).'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       version:
+#         required: true
+#         type: string
+#     secrets:
+#       N8N_ASSISTANT_APP_ID:
+#         required: true
+#       N8N_ASSISTANT_PRIVATE_KEY:
+#         required: true
+#   workflow_dispatch:
+#     inputs:
+#       version:
+#         description: 'The minor release version (e.g. 2.10.0).'
+#         required: true
+#         type: string
+# 
 permissions:
   contents: read
 

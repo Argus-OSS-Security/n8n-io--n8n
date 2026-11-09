@@ -1,24 +1,25 @@
 name: 'Test: Linting'
 
-on:
-  workflow_call:
-    inputs:
-      ref:
-        description: GitHub ref to lint.
-        required: false
-        type: string
-        default: ''
-      nodeVersion:
-        description: Version of node to use.
-        required: false
-        type: string
-        default: 26.12.1
-      affectedBase:
-        description: Commit to compare against. When set, lint only the packages changed since this commit and the packages that depend on them.
-        required: false
-        type: string
-        default: ''
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       ref:
+#         description: GitHub ref to lint.
+#         required: false
+#         type: string
+#         default: ''
+#       nodeVersion:
+#         description: Version of node to use.
+#         required: false
+#         type: string
+#         default: 26.12.1
+#       affectedBase:
+#         description: Commit to compare against. When set, lint only the packages changed since this commit and the packages that depend on them.
+#         required: false
+#         type: string
+#         default: ''
+# 
 env:
   # Each shard runs two workers with a 6 GB cap. This fits the runner's 15.2 GB.
   NODE_OPTIONS: --max-old-space-size=6144

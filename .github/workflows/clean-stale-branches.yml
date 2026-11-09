@@ -1,24 +1,25 @@
 name: 'Util: Clean Stale Branches'
 run-name: "${{ github.event_name == 'workflow_dispatch' && format('Util: Clean Stale Branches (dry-run={0}, days={1}, exclude={2})', inputs['dry-run'], inputs.days, inputs.exclude) || '' }}"
 
-on:
-  schedule:
-    - cron: '0 10 * * 1' # Every monday
-  workflow_dispatch:
-    inputs:
-      dry-run:
-        description: 'Dry run only lists branches; uncheck to actually delete.'
-        type: boolean
-        default: true
-      days:
-        description: 'Days of inactivity before a branch is considered stale.'
-        type: string
-        default: '100'
-      exclude:
-        description: 'Comma-separated branch-name globs to always keep (e.g. release/*,1.x).'
-        type: string
-        default: ''
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: '0 10 * * 1' # Every monday
+#   workflow_dispatch:
+#     inputs:
+#       dry-run:
+#         description: 'Dry run only lists branches; uncheck to actually delete.'
+#         type: boolean
+#         default: true
+#       days:
+#         description: 'Days of inactivity before a branch is considered stale.'
+#         type: string
+#         default: '100'
+#       exclude:
+#         description: 'Comma-separated branch-name globs to always keep (e.g. release/*,1.x).'
+#         type: string
+#         default: ''
+# 
 permissions:
   contents: write # delete branches; ruleset reads use the token's implicit metadata access
   pull-requests: read # list open PRs so their head/base branches are never deleted

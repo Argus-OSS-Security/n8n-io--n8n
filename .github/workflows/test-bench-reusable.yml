@@ -1,22 +1,23 @@
 name: 'Test: Benchmarks'
 run-name: 'Test: Benchmarks (${{ inputs.ref || github.ref_name }})'
 
-on:
-  workflow_call:
-    inputs:
-      ref:
-        description: GitHub ref to test.
-        required: false
-        type: string
-        default: ''
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: Branch or ref to benchmark (defaults to the workflow's branch).
-        required: false
-        type: string
-        default: ''
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       ref:
+#         description: GitHub ref to test.
+#         required: false
+#         type: string
+#         default: ''
+#   workflow_dispatch:
+#     inputs:
+#       ref:
+#         description: Branch or ref to benchmark (defaults to the workflow's branch).
+#         required: false
+#         type: string
+#         default: ''
+# 
 env:
   NODE_OPTIONS: --max-old-space-size=6144
 

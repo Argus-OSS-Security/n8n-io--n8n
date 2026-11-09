@@ -1,11 +1,12 @@
 name: 'Util: Update Boundaries Baseline'
 
-on:
-  schedule:
-    # Run every day at 03:00 UTC
-    - cron: '0 3 * * *'
-  workflow_dispatch: # Allow manual trigger for testing
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     # Run every day at 03:00 UTC
+#     - cron: '0 3 * * *'
+#   workflow_dispatch: # Allow manual trigger for testing
+# 
 permissions: {}
 
 jobs:

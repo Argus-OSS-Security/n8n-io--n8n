@@ -1,61 +1,62 @@
 name: 'Test: Unit'
 
-on:
-  workflow_call:
-    inputs:
-      ref:
-        description: GitHub ref to test.
-        required: false
-        type: string
-        default: ''
-      nodeVersion:
-        description: Version of node to use.
-        required: false
-        type: string
-        default: 26.12.1
-      collectCoverage:
-        required: false
-        default: false
-        type: boolean
-      affectedPackages:
-        description: |
-          Space-separated list of workspace packages affected by the PR, as
-          computed by `janitor affected-packages` in install-and-build. Empty
-          string means "no scoping data, run everything".
-        required: false
-        default: ''
-        type: string
-      changedFiles:
-        description: |
-          Newline-separated list of CHANGED_FILES from ci-filter. Passed to
-          per-package `janitor scope` invocations so test runners can filter
-          to actually-changed source files via vitest related.
-        required: false
-        default: ''
-        type: string
-      fullCliIntegration:
-        description: |
-          Run the CLI integration suite without scoping it to the changed files.
-          The caller sets it when DB files change, because a DB change can reach
-          any integration test. The DB workflow then skips its duplicate SQLite run.
-        required: false
-        default: false
-        type: boolean
-      lockfileImpactedPackages:
-        description: |
-          Packages whose resolved dependencies changed in pnpm-lock.yaml, as
-          printed by `janitor lockfile-impact` in install-and-build. Empty means
-          no signal: a lockfile change then runs every package in full.
-        required: false
-        default: ''
-        type: string
-      testRetries:
-        description: |
-          How many times vitest retries a failed test. The merge queue sets it,
-          so that one flaky test does not remove a PR from the queue.
-        required: false
-        default: 0
-        type: number
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       ref:
+#         description: GitHub ref to test.
+#         required: false
+#         type: string
+#         default: ''
+#       nodeVersion:
+#         description: Version of node to use.
+#         required: false
+#         type: string
+#         default: 26.12.1
+#       collectCoverage:
+#         required: false
+#         default: false
+#         type: boolean
+#       affectedPackages:
+#         description: |
+#           Space-separated list of workspace packages affected by the PR, as
+#           computed by `janitor affected-packages` in install-and-build. Empty
+#           string means "no scoping data, run everything".
+#         required: false
+#         default: ''
+#         type: string
+#       changedFiles:
+#         description: |
+#           Newline-separated list of CHANGED_FILES from ci-filter. Passed to
+#           per-package `janitor scope` invocations so test runners can filter
+#           to actually-changed source files via vitest related.
+#         required: false
+#         default: ''
+#         type: string
+#       fullCliIntegration:
+#         description: |
+#           Run the CLI integration suite without scoping it to the changed files.
+#           The caller sets it when DB files change, because a DB change can reach
+#           any integration test. The DB workflow then skips its duplicate SQLite run.
+#         required: false
+#         default: false
+#         type: boolean
+#       lockfileImpactedPackages:
+#         description: |
+#           Packages whose resolved dependencies changed in pnpm-lock.yaml, as
+#           printed by `janitor lockfile-impact` in install-and-build. Empty means
+#           no signal: a lockfile change then runs every package in full.
+#         required: false
+#         default: ''
+#         type: string
+#       testRetries:
+#         description: |
+#           How many times vitest retries a failed test. The merge queue sets it,
+#           so that one flaky test does not remove a PR from the queue.
+#         required: false
+#         default: 0
+#         type: number
 env:
   NODE_OPTIONS: --max-old-space-size=7168
   # With a change signal, the shared vitest configs measure only the changed files.

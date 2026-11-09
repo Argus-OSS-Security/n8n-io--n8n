@@ -1,14 +1,15 @@
 name: 'Test: Evals Python'
 
-on:
-  pull_request:
-    paths:
-      - packages/@n8n/ai-workflow-builder.ee/evaluations/programmatic/python/**
-      - .github/workflows/test-evals-python.yml
-  push:
-    paths:
-      - packages/@n8n/ai-workflow-builder.ee/evaluations/programmatic/python/**
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     paths:
+#       - packages/@n8n/ai-workflow-builder.ee/evaluations/programmatic/python/**
+#       - .github/workflows/test-evals-python.yml
+#   push:
+#     paths:
+#       - packages/@n8n/ai-workflow-builder.ee/evaluations/programmatic/python/**
+# 
 jobs:
   workflow-comparison:
     name: Workflow Comparison Python

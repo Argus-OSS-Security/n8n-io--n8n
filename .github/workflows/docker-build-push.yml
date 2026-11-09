@@ -10,87 +10,88 @@ env:
   NODE_OPTIONS: '--max-old-space-size=7168'
   NODE_VERSION: '26.12.1'
 
-on:
-  schedule:
-    - cron: '0 0 * * *'
-
-  workflow_call:
-    inputs:
-      n8n_version:
-        description: 'N8N version to build'
-        required: true
-        type: string
-      release_type:
-        description: 'Release type (stable, nightly, dev)'
-        required: false
-        type: string
-        default: 'stable'
-      push_enabled:
-        description: 'Whether to push the built images'
-        required: false
-        type: boolean
-        default: true
-      ref:
-        description: 'Git ref (branch/tag/sha) to build from. Empty checks out the triggering ref.'
-        required: false
-        type: string
-        default: ''
-      date_tag:
-        description: 'Optional date suffix for an extra <version>-<date> tag (e.g. 20260625)'
-        required: false
-        type: string
-        default: ''
-      create_attestations:
-        description: 'Create release provenance, VEX, and SBOM attestations'
-        required: false
-        type: boolean
-        default: false
-    outputs:
-      # Repo name + multi-arch manifest digest per image, so callers can promote what
-      # was actually pushed (retag by digest) instead of re-deriving tag strings.
-      # Empty when push_enabled is false — the manifest job doesn't run.
-      n8n_image:
-        description: 'GHCR repo for the n8n image (no tag)'
-        value: ${{ jobs.create_multi_arch_manifest.outputs.n8n_image }}
-      n8n_digest:
-        description: 'Multi-arch manifest digest of the n8n image'
-        value: ${{ jobs.create_multi_arch_manifest.outputs.n8n_digest }}
-      n8n_pc_image:
-        description: 'GHCR repo for the pointer-compressed n8n image (no tag; same repo as n8n)'
-        value: ${{ jobs.create_multi_arch_manifest.outputs.n8n_pc_image }}
-      n8n_pc_digest:
-        description: 'Multi-arch manifest digest of the pointer-compressed n8n image'
-        value: ${{ jobs.create_multi_arch_manifest.outputs.n8n_pc_digest }}
-      runners_image:
-        description: 'GHCR repo for the runners image (no tag)'
-        value: ${{ jobs.create_multi_arch_manifest.outputs.runners_image }}
-      runners_digest:
-        description: 'Multi-arch manifest digest of the runners image'
-        value: ${{ jobs.create_multi_arch_manifest.outputs.runners_digest }}
-      runners_distroless_image:
-        description: 'GHCR repo for the distroless runners image (no tag; same repo as runners)'
-        value: ${{ jobs.create_multi_arch_manifest.outputs.runners_distroless_image }}
-      runners_distroless_digest:
-        description: 'Multi-arch manifest digest of the distroless runners image'
-        value: ${{ jobs.create_multi_arch_manifest.outputs.runners_distroless_digest }}
-
-  workflow_dispatch:
-    inputs:
-      push_enabled:
-        description: 'Push image to registry'
-        required: false
-        type: boolean
-        default: true
-      include_arm64:
-        description: 'Also build linux/arm64 (default is amd64-only for manual/branch builds)'
-        required: false
-        type: boolean
-        default: false
-      success_url:
-        description: 'URL to call after the build is successful'
-        required: false
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: '0 0 * * *'
+# 
+#   workflow_call:
+#     inputs:
+#       n8n_version:
+#         description: 'N8N version to build'
+#         required: true
+#         type: string
+#       release_type:
+#         description: 'Release type (stable, nightly, dev)'
+#         required: false
+#         type: string
+#         default: 'stable'
+#       push_enabled:
+#         description: 'Whether to push the built images'
+#         required: false
+#         type: boolean
+#         default: true
+#       ref:
+#         description: 'Git ref (branch/tag/sha) to build from. Empty checks out the triggering ref.'
+#         required: false
+#         type: string
+#         default: ''
+#       date_tag:
+#         description: 'Optional date suffix for an extra <version>-<date> tag (e.g. 20260625)'
+#         required: false
+#         type: string
+#         default: ''
+#       create_attestations:
+#         description: 'Create release provenance, VEX, and SBOM attestations'
+#         required: false
+#         type: boolean
+#         default: false
+#     outputs:
+#       # Repo name + multi-arch manifest digest per image, so callers can promote what
+#       # was actually pushed (retag by digest) instead of re-deriving tag strings.
+#       # Empty when push_enabled is false — the manifest job doesn't run.
+#       n8n_image:
+#         description: 'GHCR repo for the n8n image (no tag)'
+#         value: ${{ jobs.create_multi_arch_manifest.outputs.n8n_image }}
+#       n8n_digest:
+#         description: 'Multi-arch manifest digest of the n8n image'
+#         value: ${{ jobs.create_multi_arch_manifest.outputs.n8n_digest }}
+#       n8n_pc_image:
+#         description: 'GHCR repo for the pointer-compressed n8n image (no tag; same repo as n8n)'
+#         value: ${{ jobs.create_multi_arch_manifest.outputs.n8n_pc_image }}
+#       n8n_pc_digest:
+#         description: 'Multi-arch manifest digest of the pointer-compressed n8n image'
+#         value: ${{ jobs.create_multi_arch_manifest.outputs.n8n_pc_digest }}
+#       runners_image:
+#         description: 'GHCR repo for the runners image (no tag)'
+#         value: ${{ jobs.create_multi_arch_manifest.outputs.runners_image }}
+#       runners_digest:
+#         description: 'Multi-arch manifest digest of the runners image'
+#         value: ${{ jobs.create_multi_arch_manifest.outputs.runners_digest }}
+#       runners_distroless_image:
+#         description: 'GHCR repo for the distroless runners image (no tag; same repo as runners)'
+#         value: ${{ jobs.create_multi_arch_manifest.outputs.runners_distroless_image }}
+#       runners_distroless_digest:
+#         description: 'Multi-arch manifest digest of the distroless runners image'
+#         value: ${{ jobs.create_multi_arch_manifest.outputs.runners_distroless_digest }}
+# 
+#   workflow_dispatch:
+#     inputs:
+#       push_enabled:
+#         description: 'Push image to registry'
+#         required: false
+#         type: boolean
+#         default: true
+#       include_arm64:
+#         description: 'Also build linux/arm64 (default is amd64-only for manual/branch builds)'
+#         required: false
+#         type: boolean
+#         default: false
+#       success_url:
+#         description: 'URL to call after the build is successful'
+#         required: false
+#         type: string
+# 
 jobs:
   determine-build-context:
     name: Determine Build Context

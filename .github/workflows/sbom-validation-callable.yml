@@ -1,13 +1,14 @@
 name: 'Test: Validate Release SBOM'
 
-on:
-  workflow_call:
-    inputs:
-      sha:
-        description: 'Full commit SHA to validate'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       sha:
+#         description: 'Full commit SHA to validate'
+#         required: true
+#         type: string
+# 
 permissions:
   contents: read
 

@@ -1,15 +1,16 @@
 name: 'CI: Check PR Title'
 
-on:
-  pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
-    branches:
-      - 'master'
-      - '1.x'
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     types:
+#       - opened
+#       - edited
+#       - synchronize
+#     branches:
+#       - 'master'
+#       - '1.x'
+# 
 jobs:
   check-pr-title:
     runs-on: ubuntu-latest

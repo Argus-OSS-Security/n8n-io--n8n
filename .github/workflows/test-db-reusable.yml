@@ -1,32 +1,33 @@
 name: 'Test: DB'
 
-on:
-  workflow_call:
-    inputs:
-      ref:
-        required: false
-        type: string
-        default: ''
-      matrix:
-        description: 'Job matrices JSON ({ integration, migration }), from .github/scripts/db-test-matrix.mjs.'
-        required: true
-        type: string
-      run-migrations:
-        description: 'Run the migration test matrix. The caller turns this off when no migration-relevant path changed.'
-        required: false
-        type: boolean
-        default: true
-      changed-files:
-        description: 'Newline-separated CHANGED_FILES from ci-filter. When set, coverage measures only the changed cli source files.'
-        required: false
-        type: string
-        default: ''
-      lockfile-impacted-packages:
-        description: 'Output of `janitor lockfile-impact`. Empty means no signal: a lockfile change then affects every package.'
-        required: false
-        type: string
-        default: ''
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       ref:
+#         required: false
+#         type: string
+#         default: ''
+#       matrix:
+#         description: 'Job matrices JSON ({ integration, migration }), from .github/scripts/db-test-matrix.mjs.'
+#         required: true
+#         type: string
+#       run-migrations:
+#         description: 'Run the migration test matrix. The caller turns this off when no migration-relevant path changed.'
+#         required: false
+#         type: boolean
+#         default: true
+#       changed-files:
+#         description: 'Newline-separated CHANGED_FILES from ci-filter. When set, coverage measures only the changed cli source files.'
+#         required: false
+#         type: string
+#         default: ''
+#       lockfile-impacted-packages:
+#         description: 'Output of `janitor lockfile-impact`. Empty means no signal: a lockfile change then affects every package.'
+#         required: false
+#         type: string
+#         default: ''
+# 
 env:
   NODE_OPTIONS: '--max-old-space-size=6144'
 

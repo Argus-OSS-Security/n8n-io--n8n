@@ -25,12 +25,13 @@
 
 name: 'Util: Sync master to 3.x'
 
-on:
-  schedule:
-    - cron: '0 6 * * *'
-  workflow_dispatch:
-
-# Serialize syncs — never run two at once.
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: '0 6 * * *'
+#   workflow_dispatch:
+# 
+# # Serialize syncs — never run two at once.
 concurrency:
   group: sync-master-to-3x
   cancel-in-progress: false

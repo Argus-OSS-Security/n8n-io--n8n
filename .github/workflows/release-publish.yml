@@ -1,12 +1,13 @@
 name: 'Release: Publish'
 
-on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - 'release/*'
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     types:
+#       - closed
+#     branches:
+#       - 'release/*'
+# 
 concurrency:
   group: ${{ contains(github.event.pull_request.body, '<!-- release-prerelease -->') && 'sync-master-to-3x' || format('release-publish-{0}', github.event.pull_request.base.ref) }}
   cancel-in-progress: false

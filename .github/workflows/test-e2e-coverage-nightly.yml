@@ -1,10 +1,11 @@
 name: 'Test: E2E Coverage Nightly'
 
-on:
-  schedule:
-    - cron: '0 2 * * *' # Nightly at 02:00 UTC
-  workflow_dispatch:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: '0 2 * * *' # Nightly at 02:00 UTC
+#   workflow_dispatch:
+# 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

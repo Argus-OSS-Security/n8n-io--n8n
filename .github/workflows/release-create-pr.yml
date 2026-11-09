@@ -1,54 +1,55 @@
 name: 'Release: Create Pull Request'
 run-name: "Release: Create ${{ inputs['release-type'] }} PR from ${{ inputs['base-branch'] }}"
 
-on:
-  workflow_call:
-    inputs:
-      base-branch:
-        description: 'The branch, tag, or commit to create this release PR from.'
-        required: true
-        type: string
-
-      release-type:
-        description: 'A SemVer release type.'
-        required: true
-        type: string
-
-      prerelease:
-        description: 'Publish without promoting release channels or running stable release maintenance.'
-        required: false
-        type: boolean
-        default: false
-
-    outputs:
-      pull-request-number:
-        description: 'Number of the created pull request'
-        value: ${{ jobs.create-release-pr.outputs.pull-request-number }}
-
-  workflow_dispatch:
-    inputs:
-      base-branch:
-        description: 'The branch, tag, or commit to create this release PR from.'
-        required: true
-        default: 'master'
-
-      release-type:
-        description: 'A SemVer release type.'
-        required: true
-        type: choice
-        default: 'minor'
-        options:
-          - patch
-          - minor
-          - major
-          - experimental
-          - premajor
-
-      prerelease:
-        description: 'Publish without promoting release channels or running stable release maintenance.'
-        type: boolean
-        default: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       base-branch:
+#         description: 'The branch, tag, or commit to create this release PR from.'
+#         required: true
+#         type: string
+# 
+#       release-type:
+#         description: 'A SemVer release type.'
+#         required: true
+#         type: string
+# 
+#       prerelease:
+#         description: 'Publish without promoting release channels or running stable release maintenance.'
+#         required: false
+#         type: boolean
+#         default: false
+# 
+#     outputs:
+#       pull-request-number:
+#         description: 'Number of the created pull request'
+#         value: ${{ jobs.create-release-pr.outputs.pull-request-number }}
+# 
+#   workflow_dispatch:
+#     inputs:
+#       base-branch:
+#         description: 'The branch, tag, or commit to create this release PR from.'
+#         required: true
+#         default: 'master'
+# 
+#       release-type:
+#         description: 'A SemVer release type.'
+#         required: true
+#         type: choice
+#         default: 'minor'
+#         options:
+#           - patch
+#           - minor
+#           - major
+#           - experimental
+#           - premajor
+# 
+#       prerelease:
+#         description: 'Publish without promoting release channels or running stable release maintenance.'
+#         type: boolean
+#         default: false
+# 
 permissions: {}
 
 jobs:

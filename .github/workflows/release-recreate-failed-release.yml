@@ -7,19 +7,20 @@ run-name: 'Release: Recreate failed release ${{ inputs.failed-version }}'
 # merged into `release/*`, so a new release branch + PR is the only way to
 # re-drive it.
 
-on:
-  workflow_dispatch:
-    inputs:
-      failed-version:
-        description: 'Version whose release pipeline failed after it reached npm (e.g. 2.27.2)'
-        required: true
-        type: string
-      force:
-        description: 'Skip the npm registry check (use when the registry is unreliable)'
-        required: false
-        type: boolean
-        default: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       failed-version:
+#         description: 'Version whose release pipeline failed after it reached npm (e.g. 2.27.2)'
+#         required: true
+#         type: string
+#       force:
+#         description: 'Skip the npm registry check (use when the registry is unreliable)'
+#         required: false
+#         type: boolean
+#         default: false
+# 
 permissions:
   contents: read
 

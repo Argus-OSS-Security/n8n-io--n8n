@@ -15,28 +15,29 @@ run-name: "${{ github.event_name == 'workflow_dispatch' && format('Instance AI E
 # ("Instance AI Evals: Experiments") directly: it exposes the full knob set
 # (branch, filter, iterations, experiment-name, model), runs dispatches in
 # parallel (no per-PR cancellation), and hits the SHA-keyed docker image cache.
-on:
-  pull_request:
-    types: [opened, reopened, ready_for_review]
-    paths:
-      - 'packages/@n8n/instance-ai/src/**'
-      - 'packages/@n8n/instance-ai/skills/**'
-      - 'packages/@n8n/instance-ai/knowledge-base/**'
-      - 'packages/@n8n/instance-ai/evaluations/**'
-      - 'packages/cli/src/modules/instance-ai/**'
-      - 'packages/cli/src/modules/agents/**'
-      - 'packages/core/src/execution-engine/eval-mock-helpers.ts'
-      - 'packages/@n8n/agents/src/**'
-  workflow_dispatch:
-    inputs:
-      pr:
-        description: 'PR number to re-run against its latest commit. Resolves the PR head at dispatch time and posts results back. For branch/experiment runs use "Instance AI Evals: Experiments" instead.'
-        required: true
-      tier:
-        description: 'Test-case dataset for the re-run. Empty = `pr`.'
-        required: false
-        default: ''
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     types: [opened, reopened, ready_for_review]
+#     paths:
+#       - 'packages/@n8n/instance-ai/src/**'
+#       - 'packages/@n8n/instance-ai/skills/**'
+#       - 'packages/@n8n/instance-ai/knowledge-base/**'
+#       - 'packages/@n8n/instance-ai/evaluations/**'
+#       - 'packages/cli/src/modules/instance-ai/**'
+#       - 'packages/cli/src/modules/agents/**'
+#       - 'packages/core/src/execution-engine/eval-mock-helpers.ts'
+#       - 'packages/@n8n/agents/src/**'
+#   workflow_dispatch:
+#     inputs:
+#       pr:
+#         description: 'PR number to re-run against its latest commit. Resolves the PR head at dispatch time and posts results back. For branch/experiment runs use "Instance AI Evals: Experiments" instead.'
+#         required: true
+#       tier:
+#         description: 'Test-case dataset for the re-run. Empty = `pr`.'
+#         required: false
+#         default: ''
+# 
 concurrency:
   # Key on the PR number for dispatched re-runs (github.ref would collapse all
   # dispatches from the default branch into one group and cross-cancel them).

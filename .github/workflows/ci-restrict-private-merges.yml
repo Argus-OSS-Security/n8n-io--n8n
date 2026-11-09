@@ -1,11 +1,12 @@
 name: 'CI: Check merge source and destination'
 
-on:
-  pull_request:
-    branches:
-      - master
-      - 1.x
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     branches:
+#       - master
+#       - 1.x
+# 
 permissions:
   pull-requests: write
   contents: read

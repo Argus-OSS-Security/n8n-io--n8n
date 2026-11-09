@@ -1,11 +1,12 @@
 name: 'Util: Notify PR Status'
 
-on:
-  pull_request_review:
-    types: [submitted, dismissed]
-  pull_request:
-    types: [closed]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request_review:
+#     types: [submitted, dismissed]
+#   pull_request:
+#     types: [closed]
+# 
 jobs:
   notify:
     runs-on: ubuntu-latest

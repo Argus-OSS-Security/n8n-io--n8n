@@ -1,158 +1,159 @@
 name: 'Instance AI Evals: Experiments'
 run-name: "Instance AI Evals: ${{ inputs.branch || 'master' }} (tier=${{ inputs.tier || 'all' }}, iterations=${{ inputs.iterations }}, model=${{ inputs.model || 'default' }}, experiment=${{ inputs['experiment-name'] || '-' }})"
 
-on:
-  workflow_call:
-    inputs:
-      branch:
-        description: 'GitHub branch to test'
-        required: false
-        type: string
-        default: 'master'
-      filter:
-        description: 'Filter test cases by filename substring (e.g. "contact-form")'
-        required: false
-        type: string
-        default: ''
-      tier:
-        description: 'Test-case dataset to run (e.g. "pr", "full"). Empty = no filter.'
-        required: false
-        type: string
-        default: ''
-      suite:
-        description: 'LangTracer suite slug or id to pull test cases from.'
-        required: false
-        type: string
-        default: 'baseline'
-      sandbox-provider:
-        description: 'Sandbox provider (n8n-sandbox or daytona)'
-        required: false
-        type: string
-        default: 'n8n-sandbox'
-      iterations:
-        description: 'Iterations per test case'
-        required: false
-        type: string
-        default: '3'
-      experiment-name:
-        description: 'LangSmith experiment name (instance-ai-baseline refreshes the baseline)'
-        required: false
-        type: string
-        default: ''
-      pr-number:
-        description: 'PR number to post results back to. Empty = derive from the pull_request event.'
-        required: false
-        type: string
-        default: ''
-      cache-sha:
-        description: 'SHA for the docker image cache key. Empty = github.sha. Set to the tested commit on dispatch re-runs so the image matches the code under test.'
-        required: false
-        type: string
-        default: ''
-      revision-sha:
-        description: 'Commit SHA under test, for LangSmith revision tagging. Empty = github.sha.'
-        required: false
-        type: string
-        default: ''
-      head-ref:
-        description: 'Branch name under test, for LangSmith branch tagging. Empty = derive from context.'
-        required: false
-        type: string
-        default: ''
-      model:
-        description: 'Model override (provider/model). Empty = anthropic/claude-opus-5-5. Vertex Claude: google-vertex-anthropic/<model>. OpenAI-compat experiments use custom/<model> + model-url + model-key. See evaluations/README.md.'
-        required: false
-        type: string
-        default: ''
-      model-url:
-        description: 'Optional N8N_INSTANCE_AI_MODEL_URL (required for custom/* OpenAI-compatible /v1; also anthropic/* Azure Foundry). See evaluations/README.md.'
-        required: false
-        type: string
-        default: ''
-      model-key:
-        description: 'Which EVALS_* secret to use for custom/* (or anthropic/* + model-url). One of: baseten, fireworks, together, modal, databricks, azure, lyceum. Empty = keyless custom, or native openai/openrouter/xai/anthropic prefix routing.'
-        required: false
-        type: string
-        default: ''
-      reasoning-effort:
-        description: 'Optional custom/* reasoning effort override (none|minimal|low|medium|high|xhigh|max). Empty = runtime known-model map; still empty = omit.'
-        required: false
-        type: string
-        default: ''
-      supports-structured-outputs:
-        description: 'Optional custom/* supportsStructuredOutputs override (true|false). Empty = runtime known-model map; still empty = omit.'
-        required: false
-        type: string
-        default: ''
-      lanes:
-        description: 'Parallel n8n lane containers (1-11). Empty = 10, or 1 when model-key=baseten (fits Baseten Basic verified ~500k TPM).'
-        required: false
-        type: string
-        default: ''
-      eval-concurrency:
-        description: 'Concurrent scenario executions. Empty = 32, or 2 when model-key=baseten (~0.5M TPM / ~12 RPM — fits Baseten Basic verified).'
-        required: false
-        type: string
-        default: ''
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: 'GitHub branch to test'
-        required: false
-        default: 'master'
-      filter:
-        description: 'Filter test cases by filename substring (e.g. "contact-form")'
-        required: false
-        default: ''
-      tier:
-        description: 'Test-case dataset to run (e.g. "pr", "full"). Empty = no filter.'
-        required: false
-        default: ''
-      suite:
-        description: 'LangTracer suite slug or id to pull test cases from.'
-        required: false
-        default: 'baseline'
-      sandbox-provider:
-        description: 'Sandbox provider (n8n-sandbox or daytona)'
-        required: false
-        default: 'n8n-sandbox'
-      iterations:
-        description: 'Iterations per test case (use 10 for a baseline)'
-        required: false
-        default: '3'
-      experiment-name:
-        description: 'LangSmith experiment name (instance-ai-baseline refreshes the baseline)'
-        required: false
-        default: ''
-      model:
-        description: 'Model for all Instance AI agents (provider/model). Empty = backend default (anthropic/claude-opus-5-5). Vertex Claude: google-vertex-anthropic/<model>. OpenAI-compat experiments: custom/<model> + model-url + model-key.'
-        required: false
-        default: ''
-      model-url:
-        description: 'Base URL (N8N_INSTANCE_AI_MODEL_URL). Required for custom/*; optional for anthropic/* Azure Foundry.'
-        required: false
-        default: ''
-      model-key:
-        description: 'EVALS_* secret alias for custom/*: baseten | fireworks | together | modal | databricks | azure | lyceum. Empty = keyless custom or native provider prefix.'
-        required: false
-        default: ''
-      reasoning-effort:
-        description: 'Optional custom/* reasoning effort override (none|minimal|low|medium|high|xhigh|max). Empty = runtime known-model map; still empty = omit.'
-        required: false
-        default: ''
-      supports-structured-outputs:
-        description: 'Optional custom/* supportsStructuredOutputs override (true|false). Empty = runtime known-model map; still empty = omit.'
-        required: false
-        default: ''
-      lanes:
-        description: 'Parallel n8n lane containers (1-11). Empty = 10, or 1 when model-key=baseten (fits Baseten Basic verified ~500k TPM).'
-        required: false
-        default: ''
-      eval-concurrency:
-        description: 'Concurrent scenarios. Empty = 32, or 2 when model-key=baseten (~0.5M TPM / ~12 RPM — fits Baseten Basic verified).'
-        required: false
-        default: ''
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       branch:
+#         description: 'GitHub branch to test'
+#         required: false
+#         type: string
+#         default: 'master'
+#       filter:
+#         description: 'Filter test cases by filename substring (e.g. "contact-form")'
+#         required: false
+#         type: string
+#         default: ''
+#       tier:
+#         description: 'Test-case dataset to run (e.g. "pr", "full"). Empty = no filter.'
+#         required: false
+#         type: string
+#         default: ''
+#       suite:
+#         description: 'LangTracer suite slug or id to pull test cases from.'
+#         required: false
+#         type: string
+#         default: 'baseline'
+#       sandbox-provider:
+#         description: 'Sandbox provider (n8n-sandbox or daytona)'
+#         required: false
+#         type: string
+#         default: 'n8n-sandbox'
+#       iterations:
+#         description: 'Iterations per test case'
+#         required: false
+#         type: string
+#         default: '3'
+#       experiment-name:
+#         description: 'LangSmith experiment name (instance-ai-baseline refreshes the baseline)'
+#         required: false
+#         type: string
+#         default: ''
+#       pr-number:
+#         description: 'PR number to post results back to. Empty = derive from the pull_request event.'
+#         required: false
+#         type: string
+#         default: ''
+#       cache-sha:
+#         description: 'SHA for the docker image cache key. Empty = github.sha. Set to the tested commit on dispatch re-runs so the image matches the code under test.'
+#         required: false
+#         type: string
+#         default: ''
+#       revision-sha:
+#         description: 'Commit SHA under test, for LangSmith revision tagging. Empty = github.sha.'
+#         required: false
+#         type: string
+#         default: ''
+#       head-ref:
+#         description: 'Branch name under test, for LangSmith branch tagging. Empty = derive from context.'
+#         required: false
+#         type: string
+#         default: ''
+#       model:
+#         description: 'Model override (provider/model). Empty = anthropic/claude-opus-5-5. Vertex Claude: google-vertex-anthropic/<model>. OpenAI-compat experiments use custom/<model> + model-url + model-key. See evaluations/README.md.'
+#         required: false
+#         type: string
+#         default: ''
+#       model-url:
+#         description: 'Optional N8N_INSTANCE_AI_MODEL_URL (required for custom/* OpenAI-compatible /v1; also anthropic/* Azure Foundry). See evaluations/README.md.'
+#         required: false
+#         type: string
+#         default: ''
+#       model-key:
+#         description: 'Which EVALS_* secret to use for custom/* (or anthropic/* + model-url). One of: baseten, fireworks, together, modal, databricks, azure, lyceum. Empty = keyless custom, or native openai/openrouter/xai/anthropic prefix routing.'
+#         required: false
+#         type: string
+#         default: ''
+#       reasoning-effort:
+#         description: 'Optional custom/* reasoning effort override (none|minimal|low|medium|high|xhigh|max). Empty = runtime known-model map; still empty = omit.'
+#         required: false
+#         type: string
+#         default: ''
+#       supports-structured-outputs:
+#         description: 'Optional custom/* supportsStructuredOutputs override (true|false). Empty = runtime known-model map; still empty = omit.'
+#         required: false
+#         type: string
+#         default: ''
+#       lanes:
+#         description: 'Parallel n8n lane containers (1-11). Empty = 10, or 1 when model-key=baseten (fits Baseten Basic verified ~500k TPM).'
+#         required: false
+#         type: string
+#         default: ''
+#       eval-concurrency:
+#         description: 'Concurrent scenario executions. Empty = 32, or 2 when model-key=baseten (~0.5M TPM / ~12 RPM — fits Baseten Basic verified).'
+#         required: false
+#         type: string
+#         default: ''
+#   workflow_dispatch:
+#     inputs:
+#       branch:
+#         description: 'GitHub branch to test'
+#         required: false
+#         default: 'master'
+#       filter:
+#         description: 'Filter test cases by filename substring (e.g. "contact-form")'
+#         required: false
+#         default: ''
+#       tier:
+#         description: 'Test-case dataset to run (e.g. "pr", "full"). Empty = no filter.'
+#         required: false
+#         default: ''
+#       suite:
+#         description: 'LangTracer suite slug or id to pull test cases from.'
+#         required: false
+#         default: 'baseline'
+#       sandbox-provider:
+#         description: 'Sandbox provider (n8n-sandbox or daytona)'
+#         required: false
+#         default: 'n8n-sandbox'
+#       iterations:
+#         description: 'Iterations per test case (use 10 for a baseline)'
+#         required: false
+#         default: '3'
+#       experiment-name:
+#         description: 'LangSmith experiment name (instance-ai-baseline refreshes the baseline)'
+#         required: false
+#         default: ''
+#       model:
+#         description: 'Model for all Instance AI agents (provider/model). Empty = backend default (anthropic/claude-opus-5-5). Vertex Claude: google-vertex-anthropic/<model>. OpenAI-compat experiments: custom/<model> + model-url + model-key.'
+#         required: false
+#         default: ''
+#       model-url:
+#         description: 'Base URL (N8N_INSTANCE_AI_MODEL_URL). Required for custom/*; optional for anthropic/* Azure Foundry.'
+#         required: false
+#         default: ''
+#       model-key:
+#         description: 'EVALS_* secret alias for custom/*: baseten | fireworks | together | modal | databricks | azure | lyceum. Empty = keyless custom or native provider prefix.'
+#         required: false
+#         default: ''
+#       reasoning-effort:
+#         description: 'Optional custom/* reasoning effort override (none|minimal|low|medium|high|xhigh|max). Empty = runtime known-model map; still empty = omit.'
+#         required: false
+#         default: ''
+#       supports-structured-outputs:
+#         description: 'Optional custom/* supportsStructuredOutputs override (true|false). Empty = runtime known-model map; still empty = omit.'
+#         required: false
+#         default: ''
+#       lanes:
+#         description: 'Parallel n8n lane containers (1-11). Empty = 10, or 1 when model-key=baseten (fits Baseten Basic verified ~500k TPM).'
+#         required: false
+#         default: ''
+#       eval-concurrency:
+#         description: 'Concurrent scenarios. Empty = 32, or 2 when model-key=baseten (~0.5M TPM / ~12 RPM — fits Baseten Basic verified).'
+#         required: false
+#         default: ''
+# 
 jobs:
   run-evals:
     name: 'Run Evals'

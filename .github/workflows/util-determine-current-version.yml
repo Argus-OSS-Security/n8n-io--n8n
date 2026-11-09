@@ -1,19 +1,20 @@
 name: 'Util: Determine current versions'
 
-on:
-  workflow_dispatch:
-  workflow_call:
-    outputs:
-      stable:
-        description: 'Stable release version'
-        value: ${{ jobs.get-versions.outputs.stable }}
-      beta:
-        description: 'Beta release version'
-        value: ${{ jobs.get-versions.outputs.beta }}
-      v1:
-        description: 'v1 release version'
-        value: ${{ jobs.get-versions.outputs.v1 }}
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#   workflow_call:
+#     outputs:
+#       stable:
+#         description: 'Stable release version'
+#         value: ${{ jobs.get-versions.outputs.stable }}
+#       beta:
+#         description: 'Beta release version'
+#         value: ${{ jobs.get-versions.outputs.beta }}
+#       v1:
+#         description: 'v1 release version'
+#         value: ${{ jobs.get-versions.outputs.v1 }}
+# 
 jobs:
   get-versions:
     runs-on: ubuntu-latest

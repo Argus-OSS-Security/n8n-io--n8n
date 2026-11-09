@@ -1,25 +1,26 @@
 name: 'Test: Workflows'
 
-on:
-  workflow_call:
-    inputs:
-      git_ref:
-        description: 'The Git ref (branch, tag, or SHA) to checkout and test.'
-        required: true
-        type: string
-      compare_schemas:
-        description: 'Set to "true" to enable schema comparison during tests.'
-        required: false
-        default: 'false'
-        type: string
-    secrets:
-      ENCRYPTION_KEY:
-        description: 'Encryption key for n8n operations.'
-        required: true
-      CURRENTS_RECORD_KEY:
-        description: 'Currents record key for test reporting. Empty on fork PRs.'
-        required: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       git_ref:
+#         description: 'The Git ref (branch, tag, or SHA) to checkout and test.'
+#         required: true
+#         type: string
+#       compare_schemas:
+#         description: 'Set to "true" to enable schema comparison during tests.'
+#         required: false
+#         default: 'false'
+#         type: string
+#     secrets:
+#       ENCRYPTION_KEY:
+#         description: 'Encryption key for n8n operations.'
+#         required: true
+#       CURRENTS_RECORD_KEY:
+#         description: 'Currents record key for test reporting. Empty on fork PRs.'
+#         required: false
+# 
 env:
   NODE_OPTIONS: --max-old-space-size=3072
 

@@ -1,14 +1,15 @@
 name: 'Utility: Probe npm OIDC Exchange'
 
-on:
-  workflow_dispatch:
-    inputs:
-      package-name:
-        description: 'Published npm package to test'
-        required: true
-        default: '@n8n/typeorm'
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       package-name:
+#         description: 'Published npm package to test'
+#         required: true
+#         default: '@n8n/typeorm'
+#         type: string
+# 
 permissions: {}
 
 jobs:

@@ -1,10 +1,11 @@
 name: 'Security: Publish fix'
 
-on:
-  pull_request:
-    types: [closed]
-    branches: [master]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     types: [closed]
+#     branches: [master]
+# 
 jobs:
   sync-security-fix:
     if: github.repository == 'n8n-io/n8n-private' && github.event.pull_request.merged == true

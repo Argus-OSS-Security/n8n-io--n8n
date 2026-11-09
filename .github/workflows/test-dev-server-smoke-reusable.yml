@@ -1,13 +1,14 @@
 name: 'Test: Dev-server boot smoke'
 
-on:
-  workflow_call:
-    inputs:
-      ref:
-        description: 'Git ref to test'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       ref:
+#         description: 'Git ref to test'
+#         required: true
+#         type: string
+# 
 env:
   NODE_OPTIONS: '--max-old-space-size=6144'
   PLAYWRIGHT_BROWSERS_PATH: packages/quality/testing/playwright/.playwright-browsers

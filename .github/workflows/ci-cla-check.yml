@@ -19,19 +19,20 @@ run-name: "${{ github.event_name == 'workflow_dispatch' && format('CI: CLA Check
 #   - A single, edited-in-place PR comment listing unsigned contributors.
 #   - The `cla-signed` label, which community-PR triage tooling reads.
 
-on:
-  pull_request_target:
-    types: [opened, synchronize, reopened]
-  issue_comment:
-    types: [created]
-  merge_group:
-  workflow_dispatch:
-    inputs:
-      pr_number:
-        description: 'Pull request number to re-verify'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request_target:
+#     types: [opened, synchronize, reopened]
+#   issue_comment:
+#     types: [created]
+#   merge_group:
+#   workflow_dispatch:
+#     inputs:
+#       pr_number:
+#         description: 'Pull request number to re-verify'
+#         required: true
+#         type: string
+# 
 permissions:
   contents: read
   pull-requests: write

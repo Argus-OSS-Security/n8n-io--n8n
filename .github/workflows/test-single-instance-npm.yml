@@ -3,34 +3,35 @@ name: 'Test: Single-instance deps (npm-install)'
 # An npm-install graph exposes curated-lib duplicates that pnpm dev/deploy hides, because root
 # `pnpm.overrides` don't travel in published tarballs.
 
-on:
-  workflow_call:
-    inputs:
-      scope:
-        description: '"changed" verifies only packages touched since base-ref; "all" packs every publishable package.'
-        required: true
-        type: string
-      base-ref:
-        description: 'Commit to diff against. Required when scope is "changed", rejected otherwise.'
-        required: false
-        type: string
-        default: ''
-      base-branch:
-        description: 'Branch to check out before verifying, so the run profiles that branch rather than the caller''s triggering revision. Only valid when scope is "all".'
-        required: false
-        type: string
-        default: ''
-      blocking:
-        description: 'Fail the calling workflow on a finding. Defaults to advisory while the curated-lib backlog is worked down.'
-        required: false
-        type: boolean
-        default: false
-      timeout-minutes:
-        description: 'Job timeout. The "all" scope packs every publishable package, so it needs longer than the scoped one.'
-        required: false
-        type: number
-        default: 20
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       scope:
+#         description: '"changed" verifies only packages touched since base-ref; "all" packs every publishable package.'
+#         required: true
+#         type: string
+#       base-ref:
+#         description: 'Commit to diff against. Required when scope is "changed", rejected otherwise.'
+#         required: false
+#         type: string
+#         default: ''
+#       base-branch:
+#         description: 'Branch to check out before verifying, so the run profiles that branch rather than the caller''s triggering revision. Only valid when scope is "all".'
+#         required: false
+#         type: string
+#         default: ''
+#       blocking:
+#         description: 'Fail the calling workflow on a finding. Defaults to advisory while the curated-lib backlog is worked down.'
+#         required: false
+#         type: boolean
+#         default: false
+#       timeout-minutes:
+#         description: 'Job timeout. The "all" scope packs every publishable package, so it needs longer than the scoped one.'
+#         required: false
+#         type: number
+#         default: 20
+# 
 jobs:
   verify:
     runs-on: ubuntu-latest

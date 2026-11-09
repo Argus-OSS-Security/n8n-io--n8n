@@ -13,10 +13,11 @@ name: Hide outdated cubic review comments
 # is this same repo, so the job below is skipped for PRs from forks -- outdated
 # cubic comments on external-contributor PRs won't be minimized.
 
-on:
-  pull_request:
-    types: [synchronize]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     types: [synchronize]
+# 
 permissions:
   pull-requests: write
 

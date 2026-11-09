@@ -1,18 +1,19 @@
 name: 'QA: Metrics PR Comment'
 
-on:
-  workflow_call:
-    inputs:
-      metrics:
-        description: 'Comma-separated list of metric names to report'
-        required: true
-        type: string
-      baseline-days:
-        description: 'Number of days for the rolling baseline'
-        required: false
-        type: number
-        default: 30
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       metrics:
+#         description: 'Comma-separated list of metric names to report'
+#         required: true
+#         type: string
+#       baseline-days:
+#         description: 'Number of days for the rolling baseline'
+#         required: false
+#         type: number
+#         default: 30
+# 
 jobs:
   post-comment:
     name: Post Metrics Comment

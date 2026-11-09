@@ -1,12 +1,13 @@
 name: 'CI: Detect New Packages on Master'
 
-on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - master
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     types:
+#       - closed
+#     branches:
+#       - master
+# 
 jobs:
   detect-new-packages:
     name: Check for new unpublished packages

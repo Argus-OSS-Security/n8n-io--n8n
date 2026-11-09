@@ -1,27 +1,28 @@
 name: 'Release: Update pointer tag'
 run-name: 'Update pointer tag: ${{ inputs.track }} -> ${{ inputs.version-tag }}'
 
-on:
-  workflow_call:
-    inputs:
-      track:
-        required: true
-        type: string
-      version-tag:
-        required: true
-        type: string
-  workflow_dispatch:
-    inputs:
-      track:
-        description: 'Release Track'
-        required: true
-        type: choice
-        options: [stable, beta, v1]
-      version-tag:
-        description: 'Version tag (e.g. n8n@2.7.0). Track tag will point to this version tag.'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       track:
+#         required: true
+#         type: string
+#       version-tag:
+#         required: true
+#         type: string
+#   workflow_dispatch:
+#     inputs:
+#       track:
+#         description: 'Release Track'
+#         required: true
+#         type: choice
+#         options: [stable, beta, v1]
+#       version-tag:
+#         description: 'Version tag (e.g. n8n@2.7.0). Track tag will point to this version tag.'
+#         required: true
+#         type: string
+# 
 permissions: {}
 
 jobs:

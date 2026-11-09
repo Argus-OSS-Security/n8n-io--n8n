@@ -13,119 +13,120 @@ run-name: "Test: MCP Workflow Evals (branch=${{ inputs.branch || github.ref_name
 # One process → one LangSmith experiment (no manifest hop, no shard/merge). MCP
 # builds AST-parse SDK code server-side (no sandbox needed); the builder is the
 # `claude` CLI, and verification runs on the execution engine.
-on:
-  workflow_call:
-    inputs:
-      branch:
-        description: 'Git ref to test. Defaults to the caller ref when empty.'
-        required: false
-        type: string
-        default: ''
-      tier:
-        description: 'Test-case dataset to build + eval (e.g. "mcp")'
-        required: false
-        type: string
-        default: 'mcp'
-      suite:
-        description: 'LangTracer suite slug or id to pull test cases from.'
-        required: false
-        type: string
-        default: 'baseline'
-      filter:
-        description: 'Only build + eval test cases whose slug matches (comma-separated; empty = whole tier)'
-        required: false
-        type: string
-        default: ''
-      lanes:
-        description: 'Number of parallel n8n lanes (containers) on the runner'
-        required: false
-        type: string
-        default: '6'
-      iterations:
-        description: 'Builds per test case + verifier iterations (1-5; 5 = high-confidence).'
-        required: false
-        type: string
-        default: '3'
-      eval-concurrency:
-        description: 'Concurrent scenario executions in the verifier (empty = lanes * 2). Raise it to push throughput, but too high starves the shared Anthropic budget and causes verifier/MCP timeouts.'
-        required: false
-        type: string
-        default: ''
-      build-model:
-        description: 'Anthropic model id for the claude MCP build step (injected as ANTHROPIC_MODEL)'
-        required: false
-        type: string
-        default: 'claude-opus-4-8'
-      experiment-name:
-        description: 'LangSmith experiment name (mcp-baseline refreshes the baseline)'
-        required: false
-        type: string
-        default: ''
-    # Declared explicitly (not `secrets: inherit`) so the caller passes only what
-    # this workflow needs. All optional — a missing secret resolves to "" (e.g.
-    # LangSmith recording is simply skipped without a key).
-    secrets:
-      EVALS_ANTHROPIC_KEY:
-        required: false
-      N8N_LICENSE_ACTIVATION_KEY:
-        required: false
-      N8N_LICENSE_CERT:
-        required: false
-      N8N_ENCRYPTION_KEY:
-        required: false
-      EVALS_LANGSMITH_ENDPOINT:
-        required: false
-      EVALS_LANGSMITH_API_KEY:
-        required: false
-      # The eval CLI pulls the test-case suite from LangTracer.
-      EVALS_LANGTRACER_URL:
-        required: false
-      LANGTRACER_API_KEY:
-        required: false
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Git ref to test. Defaults to the dispatched ref when empty.'
-        required: false
-        default: ''
-      tier:
-        description: 'Test-case dataset to build + eval (e.g. "mcp")'
-        required: false
-        default: 'mcp'
-      suite:
-        description: 'LangTracer suite slug or id to pull test cases from.'
-        required: false
-        default: 'baseline'
-      filter:
-        description: 'Only build + eval test cases whose slug matches (comma-separated; empty = whole tier)'
-        required: false
-        default: ''
-      lanes:
-        description: 'Number of parallel n8n lanes (containers) on the runner'
-        required: false
-        default: '6'
-      iterations:
-        description: 'Builds per test case + verifier iterations (1-5; 5 = high-confidence).'
-        required: false
-        type: choice
-        options:
-          - '1'
-          - '3'
-          - '5'
-        default: '3'
-      eval-concurrency:
-        description: 'Concurrent scenario executions in the verifier (empty = lanes * 2). Raise it to push throughput, but too high starves the shared Anthropic budget and causes verifier/MCP timeouts.'
-        required: false
-        default: ''
-      build-model:
-        description: 'Anthropic model id for the claude MCP build step (injected as ANTHROPIC_MODEL)'
-        required: false
-        default: 'claude-opus-4-8'
-      experiment-name:
-        description: 'LangSmith experiment name (set to mcp-baseline to refresh the baseline)'
-        required: false
-        default: ''
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       branch:
+#         description: 'Git ref to test. Defaults to the caller ref when empty.'
+#         required: false
+#         type: string
+#         default: ''
+#       tier:
+#         description: 'Test-case dataset to build + eval (e.g. "mcp")'
+#         required: false
+#         type: string
+#         default: 'mcp'
+#       suite:
+#         description: 'LangTracer suite slug or id to pull test cases from.'
+#         required: false
+#         type: string
+#         default: 'baseline'
+#       filter:
+#         description: 'Only build + eval test cases whose slug matches (comma-separated; empty = whole tier)'
+#         required: false
+#         type: string
+#         default: ''
+#       lanes:
+#         description: 'Number of parallel n8n lanes (containers) on the runner'
+#         required: false
+#         type: string
+#         default: '6'
+#       iterations:
+#         description: 'Builds per test case + verifier iterations (1-5; 5 = high-confidence).'
+#         required: false
+#         type: string
+#         default: '3'
+#       eval-concurrency:
+#         description: 'Concurrent scenario executions in the verifier (empty = lanes * 2). Raise it to push throughput, but too high starves the shared Anthropic budget and causes verifier/MCP timeouts.'
+#         required: false
+#         type: string
+#         default: ''
+#       build-model:
+#         description: 'Anthropic model id for the claude MCP build step (injected as ANTHROPIC_MODEL)'
+#         required: false
+#         type: string
+#         default: 'claude-opus-4-8'
+#       experiment-name:
+#         description: 'LangSmith experiment name (mcp-baseline refreshes the baseline)'
+#         required: false
+#         type: string
+#         default: ''
+#     # Declared explicitly (not `secrets: inherit`) so the caller passes only what
+#     # this workflow needs. All optional — a missing secret resolves to "" (e.g.
+#     # LangSmith recording is simply skipped without a key).
+#     secrets:
+#       EVALS_ANTHROPIC_KEY:
+#         required: false
+#       N8N_LICENSE_ACTIVATION_KEY:
+#         required: false
+#       N8N_LICENSE_CERT:
+#         required: false
+#       N8N_ENCRYPTION_KEY:
+#         required: false
+#       EVALS_LANGSMITH_ENDPOINT:
+#         required: false
+#       EVALS_LANGSMITH_API_KEY:
+#         required: false
+#       # The eval CLI pulls the test-case suite from LangTracer.
+#       EVALS_LANGTRACER_URL:
+#         required: false
+#       LANGTRACER_API_KEY:
+#         required: false
+#   workflow_dispatch:
+#     inputs:
+#       branch:
+#         description: 'Git ref to test. Defaults to the dispatched ref when empty.'
+#         required: false
+#         default: ''
+#       tier:
+#         description: 'Test-case dataset to build + eval (e.g. "mcp")'
+#         required: false
+#         default: 'mcp'
+#       suite:
+#         description: 'LangTracer suite slug or id to pull test cases from.'
+#         required: false
+#         default: 'baseline'
+#       filter:
+#         description: 'Only build + eval test cases whose slug matches (comma-separated; empty = whole tier)'
+#         required: false
+#         default: ''
+#       lanes:
+#         description: 'Number of parallel n8n lanes (containers) on the runner'
+#         required: false
+#         default: '6'
+#       iterations:
+#         description: 'Builds per test case + verifier iterations (1-5; 5 = high-confidence).'
+#         required: false
+#         type: choice
+#         options:
+#           - '1'
+#           - '3'
+#           - '5'
+#         default: '3'
+#       eval-concurrency:
+#         description: 'Concurrent scenario executions in the verifier (empty = lanes * 2). Raise it to push throughput, but too high starves the shared Anthropic budget and causes verifier/MCP timeouts.'
+#         required: false
+#         default: ''
+#       build-model:
+#         description: 'Anthropic model id for the claude MCP build step (injected as ANTHROPIC_MODEL)'
+#         required: false
+#         default: 'claude-opus-4-8'
+#       experiment-name:
+#         description: 'LangSmith experiment name (set to mcp-baseline to refresh the baseline)'
+#         required: false
+#         default: ''
+# 
 jobs:
   run-evals:
     name: 'Run MCP Evals'

@@ -5,25 +5,26 @@ name: 'Build: Node PC Image'
 # so each architecture builds on its native runner and a manifest job stitches
 # the per-arch images, following docker-build-push.yml.
 
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'docker/images/node-pc/Dockerfile'
-      - '.github/workflows/build-node-pc-image.yml'
-  pull_request:
-    paths:
-      - 'docker/images/node-pc/Dockerfile'
-      - '.github/workflows/build-node-pc-image.yml'
-  workflow_dispatch:
-    inputs:
-      push:
-        description: 'Push to registries'
-        required: false
-        default: false
-        type: boolean
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   push:
+#     branches:
+#       - master
+#     paths:
+#       - 'docker/images/node-pc/Dockerfile'
+#       - '.github/workflows/build-node-pc-image.yml'
+#   pull_request:
+#     paths:
+#       - 'docker/images/node-pc/Dockerfile'
+#       - '.github/workflows/build-node-pc-image.yml'
+#   workflow_dispatch:
+#     inputs:
+#       push:
+#         description: 'Push to registries'
+#         required: false
+#         default: false
+#         type: boolean
+# 
 env:
   NODE_VERSION: '26.12.1'
 

@@ -1,10 +1,11 @@
 name: 'Test: Image Efficiency'
 
-on:
-  schedule:
-    - cron: '30 4 * * *'
-  workflow_dispatch:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: '30 4 * * *'
+#   workflow_dispatch:
+# 
 permissions:
   contents: read
 

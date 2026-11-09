@@ -1,37 +1,38 @@
 name: 'Release: Publish: Post-release'
 
-on:
-  workflow_call:
-    inputs:
-      track:
-        description: 'Release track acquired from determine-version-info. (e.g. stable, beta)'
-        required: true
-        type: string
-      previous_version:
-        description: 'Previous release version acquired from determine-version-info. (e.g. 2.9.2, 1.123.22)'
-        required: true
-        type: string
-      version:
-        description: 'Release version acquired from determine-version-info. (e.g. 2.9.3, 1.123.23)'
-        required: true
-        type: string
-      bump:
-        description: 'Release bump size acquired from determine-version-info. (e.g. minor, patch)'
-        required: true
-        type: string
-      new_stable_version:
-        description: 'New stable version acquired from determine-version-info. (e.g. 2.9.3, null (on patch releases))'
-        required: true
-        type: string
-      release_type:
-        description: 'Release type acquired from determine-version-info. (stable or rc)'
-        required: true
-        type: string
-      prerelease:
-        description: 'Whether this is a standalone v3 prerelease.'
-        required: true
-        type: boolean
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       track:
+#         description: 'Release track acquired from determine-version-info. (e.g. stable, beta)'
+#         required: true
+#         type: string
+#       previous_version:
+#         description: 'Previous release version acquired from determine-version-info. (e.g. 2.9.2, 1.123.22)'
+#         required: true
+#         type: string
+#       version:
+#         description: 'Release version acquired from determine-version-info. (e.g. 2.9.3, 1.123.23)'
+#         required: true
+#         type: string
+#       bump:
+#         description: 'Release bump size acquired from determine-version-info. (e.g. minor, patch)'
+#         required: true
+#         type: string
+#       new_stable_version:
+#         description: 'New stable version acquired from determine-version-info. (e.g. 2.9.3, null (on patch releases))'
+#         required: true
+#         type: string
+#       release_type:
+#         description: 'Release type acquired from determine-version-info. (stable or rc)'
+#         required: true
+#         type: string
+#       prerelease:
+#         description: 'Whether this is a standalone v3 prerelease.'
+#         required: true
+#         type: boolean
+# 
 jobs:
   push-new-release-to-channel:
     name: Push new release to channel

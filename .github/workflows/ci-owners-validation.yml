@@ -10,19 +10,20 @@ name: 'CI: Validate OWNERS'
 
 # The paths cover every top-level path that OWNERS entries point at, so a
 # move or delete of an owned path cannot slip through unvalidated.
-on:
-  pull_request:
-    paths:
-      - '.github/**'
-      - 'assets/**'
-      - 'docker/**'
-      - 'packages/**'
-      - 'patches/**'
-      - 'scripts/**'
-      - 'security/**'
-      - '.code-health-baseline.json'
-      - 'OWNERS'
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     paths:
+#       - '.github/**'
+#       - 'assets/**'
+#       - 'docker/**'
+#       - 'packages/**'
+#       - 'patches/**'
+#       - 'scripts/**'
+#       - 'security/**'
+#       - '.code-health-baseline.json'
+#       - 'OWNERS'
+# 
 permissions:
   contents: read
 

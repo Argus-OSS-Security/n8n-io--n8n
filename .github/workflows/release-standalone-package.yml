@@ -1,28 +1,29 @@
 name: 'Release: Standalone Package'
 run-name: 'Release: ${{ inputs.package }} (${{ inputs.bump }})'
 
-on:
-  workflow_dispatch:
-    inputs:
-      package:
-        description: 'Package to release'
-        required: true
-        type: choice
-        options:
-          - '@n8n/create-node'
-          - '@n8n/eslint-plugin-community-nodes'
-          - '@n8n/scan-community-package'
-      bump:
-        description: 'Version bump type'
-        required: true
-        type: choice
-        options:
-          - patch
-          - minor
-# This workflow publishes out-of-sync with the main release pipeline, so it uses
-# token auth (secrets.NPM_DIST_TAG_AND_INITIAL_PUBLISH_TOKEN) rather than trusted
-# publishing (OIDC) — the OIDC relationship is reserved for release-publish.yml.
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       package:
+#         description: 'Package to release'
+#         required: true
+#         type: choice
+#         options:
+#           - '@n8n/create-node'
+#           - '@n8n/eslint-plugin-community-nodes'
+#           - '@n8n/scan-community-package'
+#       bump:
+#         description: 'Version bump type'
+#         required: true
+#         type: choice
+#         options:
+#           - patch
+#           - minor
+# # This workflow publishes out-of-sync with the main release pipeline, so it uses
+# # token auth (secrets.NPM_DIST_TAG_AND_INITIAL_PUBLISH_TOKEN) rather than trusted
+# # publishing (OIDC) — the OIDC relationship is reserved for release-publish.yml.
+# 
 concurrency:
   group: release-package-${{ github.event.inputs.package }}
   cancel-in-progress: false

@@ -1,32 +1,33 @@
 name: 'Release: Create Patch Release PR'
 run-name: 'Release: Create Patch Release PR for track ${{ inputs.track }}'
 
-on:
-  workflow_call:
-    inputs:
-      track:
-        description: 'Release Track'
-        required: true
-        type: string
-      force:
-        description: 'Create the PR even when there are no actionable commits'
-        required: false
-        type: boolean
-        default: false
-
-  workflow_dispatch:
-    inputs:
-      track:
-        description: 'Release Track'
-        required: true
-        type: choice
-        options: [stable, beta, v1]
-      force:
-        description: 'Create the PR even when there are no actionable commits'
-        required: false
-        type: boolean
-        default: true
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       track:
+#         description: 'Release Track'
+#         required: true
+#         type: string
+#       force:
+#         description: 'Create the PR even when there are no actionable commits'
+#         required: false
+#         type: boolean
+#         default: false
+# 
+#   workflow_dispatch:
+#     inputs:
+#       track:
+#         description: 'Release Track'
+#         required: true
+#         type: choice
+#         options: [stable, beta, v1]
+#       force:
+#         description: 'Create the PR even when there are no actionable commits'
+#         required: false
+#         type: boolean
+#         default: true
+# 
 jobs:
   determine-version-info:
     name: Determine publishing track

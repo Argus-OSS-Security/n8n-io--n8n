@@ -1,16 +1,17 @@
 name: 'Release: Create Minor Release PR'
 run-name: 'Release: Create Minor Release PR (force=${{ inputs.force }})'
 
-on:
-  workflow_dispatch:
-    inputs:
-      force:
-        description: 'Create the release PR even if a minor release already went live this week.'
-        type: boolean
-        default: false
-  # schedule:
-  #   - cron: 0 8 * * 2 # 9am CET (UTC+1), Tuesday
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       force:
+#         description: 'Create the release PR even if a minor release already went live this week.'
+#         type: boolean
+#         default: false
+#   # schedule:
+#   #   - cron: 0 8 * * 2 # 9am CET (UTC+1), Tuesday
+# 
 permissions:
   contents: read
 

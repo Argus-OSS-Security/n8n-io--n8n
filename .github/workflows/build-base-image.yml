@@ -1,25 +1,26 @@
 name: 'Build: Base Image'
 run-name: "${{ github.event_name == 'workflow_dispatch' && format('Build: Base Image (push={0})', inputs.push) || '' }}"
 
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'docker/images/n8n-base/Dockerfile'
-      - '.github/workflows/build-base-image.yml'
-  pull_request:
-    paths:
-      - 'docker/images/n8n-base/Dockerfile'
-      - '.github/workflows/build-base-image.yml'
-  workflow_dispatch:
-    inputs:
-      push:
-        description: 'Push to registries'
-        required: false
-        default: false
-        type: boolean
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   push:
+#     branches:
+#       - master
+#     paths:
+#       - 'docker/images/n8n-base/Dockerfile'
+#       - '.github/workflows/build-base-image.yml'
+#   pull_request:
+#     paths:
+#       - 'docker/images/n8n-base/Dockerfile'
+#       - '.github/workflows/build-base-image.yml'
+#   workflow_dispatch:
+#     inputs:
+#       push:
+#         description: 'Push to registries'
+#         required: false
+#         default: false
+#         type: boolean
+# 
 jobs:
   build:
     runs-on: ubuntu-latest

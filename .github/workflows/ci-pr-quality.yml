@@ -1,18 +1,19 @@
 name: 'CI: PR Quality Checks'
 
-on:
-  merge_group:
-  pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
-      - labeled
-      - unlabeled
-  issue_comment:
-    types:
-      - created
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   merge_group:
+#   pull_request:
+#     types:
+#       - opened
+#       - edited
+#       - synchronize
+#       - labeled
+#       - unlabeled
+#   issue_comment:
+#     types:
+#       - created
+# 
 jobs:
   handle-size-override:
     name: Handle /size-limit-override

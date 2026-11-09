@@ -1,16 +1,17 @@
 name: 'Build: Benchmark Image'
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - master
-    paths:
-      - 'packages/quality/efficiency/scale/benchmark/**'
-      - 'pnpm-lock.yaml'
-      - 'pnpm-workspace.yaml'
-      - '.github/workflows/build-benchmark-image.yml'
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - master
+#     paths:
+#       - 'packages/quality/efficiency/scale/benchmark/**'
+#       - 'pnpm-lock.yaml'
+#       - 'pnpm-workspace.yaml'
+#       - '.github/workflows/build-benchmark-image.yml'
+# 
 jobs:
   build:
     runs-on: ubuntu-latest

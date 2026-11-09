@@ -1,28 +1,29 @@
 name: 'Util: Publish API Schema'
 
 # Publishes the Public API OpenAPI spec of a release to Cloudflare Pages.
-on:
-  workflow_call:
-    inputs:
-      version:
-        description: 'The release version to publish the spec from (e.g. 2.45.3)'
-        required: true
-        type: string
-    secrets:
-      CLOUDFLARE_API_TOKEN:
-        required: true
-      CLOUDFLARE_ACCOUNT_ID:
-        required: true
-
-  # Allow manual re-publish
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'The release version to publish the spec from (e.g. 2.45.3), or `stable`'
-        required: true
-        type: string
-        default: stable
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       version:
+#         description: 'The release version to publish the spec from (e.g. 2.45.3)'
+#         required: true
+#         type: string
+#     secrets:
+#       CLOUDFLARE_API_TOKEN:
+#         required: true
+#       CLOUDFLARE_ACCOUNT_ID:
+#         required: true
+# 
+#   # Allow manual re-publish
+#   workflow_dispatch:
+#     inputs:
+#       version:
+#         description: 'The release version to publish the spec from (e.g. 2.45.3), or `stable`'
+#         required: true
+#         type: string
+#         default: stable
+# 
 permissions:
   contents: read
 

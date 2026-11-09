@@ -1,14 +1,15 @@
 name: 'Release: Publish New Package'
 run-name: "Release: Publish New Package (${{ inputs['package-path'] }})"
 
-on:
-  workflow_dispatch:
-    inputs:
-      package-path:
-        description: 'Path to the package to publish (e.g. packages/@n8n/my-new-package)'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       package-path:
+#         description: 'Path to the package to publish (e.g. packages/@n8n/my-new-package)'
+#         required: true
+#         type: string
+# 
 concurrency:
   group: release-new-package-${{ github.event.inputs.package-path }}
   cancel-in-progress: false

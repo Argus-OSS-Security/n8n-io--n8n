@@ -9,15 +9,16 @@ run-name: 'Docker: SBOM probe (sbom=${{ inputs.sbom }})'
 # The release itself is gated by create_multi_arch_manifest in
 # docker-build-push.yml; this probe is for investigating exporter behaviour.
 
-on:
-  workflow_dispatch:
-    inputs:
-      sbom:
-        description: 'Build with SBOM attestations (true reproduces the current release path)'
-        required: false
-        type: boolean
-        default: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       sbom:
+#         description: 'Build with SBOM attestations (true reproduces the current release path)'
+#         required: false
+#         type: boolean
+#         default: false
+# 
 env:
   NODE_VERSION: '26.12.1'
   SCRATCH_TAG: sbom-probe-${{ github.run_id }}

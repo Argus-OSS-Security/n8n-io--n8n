@@ -1,9 +1,10 @@
 name: 'Util: Cleanup abandoned release branches'
 
-on:
-  pull_request:
-    types: [closed]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     types: [closed]
+# 
 jobs:
   delete-release-branch:
     # Only if PR was closed without merge

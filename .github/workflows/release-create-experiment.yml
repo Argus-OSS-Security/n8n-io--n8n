@@ -1,14 +1,15 @@
 name: 'Release: Create Experiment PR'
 run-name: 'Release: Create Experiment Release PR (${{ inputs.commits }})'
 
-on:
-  workflow_dispatch:
-    inputs:
-      commits:
-        description: 'Space-separated list of commit SHAs to cherry-pick onto the new experimental branch.'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       commits:
+#         description: 'Space-separated list of commit SHAs to cherry-pick onto the new experimental branch.'
+#         required: true
+#         type: string
+# 
 permissions:
   contents: write
   pull-requests: write

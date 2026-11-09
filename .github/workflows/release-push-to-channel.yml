@@ -1,35 +1,36 @@
 name: 'Release: Push to Channel'
 run-name: "Release: Push n8n@${{ inputs.version }} to ${{ inputs['release-channel'] }}"
 
-on:
-  workflow_call:
-    inputs:
-      version:
-        description: 'n8n Release version to push to a channel (e.g., 1.2.3 or 1.2.3-beta.4)'
-        required: true
-        type: string
-
-      release-channel:
-        description: 'Release channel'
-        required: true
-        type: string
-
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'n8n Release version to push to a channel (e.g., 1.2.3 or 1.2.3-beta.4)'
-        required: true
-        type: string
-
-      release-channel:
-        description: 'Release channel'
-        required: true
-        type: choice
-        default: 'beta'
-        options:
-          - beta
-          - stable
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       version:
+#         description: 'n8n Release version to push to a channel (e.g., 1.2.3 or 1.2.3-beta.4)'
+#         required: true
+#         type: string
+# 
+#       release-channel:
+#         description: 'Release channel'
+#         required: true
+#         type: string
+# 
+#   workflow_dispatch:
+#     inputs:
+#       version:
+#         description: 'n8n Release version to push to a channel (e.g., 1.2.3 or 1.2.3-beta.4)'
+#         required: true
+#         type: string
+# 
+#       release-channel:
+#         description: 'Release channel'
+#         required: true
+#         type: choice
+#         default: 'beta'
+#         options:
+#           - beta
+#           - stable
+# 
 jobs:
   validate-inputs:
     name: Validate Inputs

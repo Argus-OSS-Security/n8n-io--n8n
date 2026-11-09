@@ -1,11 +1,12 @@
 name: 'Util: Refresh cubic schema'
 
-on:
-  schedule:
-    # 1st of the month at 04:00 UTC
-    - cron: '0 4 1 * *'
-  workflow_dispatch: # Allow manual trigger for testing
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     # 1st of the month at 04:00 UTC
+#     - cron: '0 4 1 * *'
+#   workflow_dispatch: # Allow manual trigger for testing
+# 
 permissions:
   contents: read
 

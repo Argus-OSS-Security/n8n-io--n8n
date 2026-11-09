@@ -14,11 +14,12 @@
 
 name: 'Security: Retarget bundle PRs'
 
-on:
-  workflow_dispatch:
-  workflow_call:
-
-# Least privilege by default; the retarget job opts into exactly what it needs.
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#   workflow_call:
+# 
+# # Least privilege by default; the retarget job opts into exactly what it needs.
 permissions: {}
 
 jobs:
